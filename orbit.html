@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Orbit Viewer</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="jquery-ui.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="bootstrap-toggle.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <div class="openNavButton" id="open-sidenav-button">
+        <a href="javascript:void(0)" onclick="openNav()">
+            <i class="fa fa-bars" aria-hidden="true"  onclick="openNav()"></i>
+        </a>
+
+    </div>
+
+    <div id="sidenav" class="sidenav">
+
+        <div id="sidenav_top_main" class="sidenav_top">
+            <a href="javascript:void(0)" class="closeNavButton" onclick="closeNav()">
+                <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+            </a>
+        </div>
+        <div id="sidenav_content_main" class="sidenav_content">
+
+            <div class="dropdown" _data-toggle="tooltip" data-placement="bottom" title="Select Camera Focus">
+                <button class="btn btn-default dropdown-toggle" type="button" id="lookAtDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span id="lookat-dropdown-label">Look At</span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="lookAtDropdown" id="lookAtDropdownOptions">
+                    <li><a href="javascript:void(0);" >SSB</a></li>
+                    <li><a href="javascript:void(0);" data-exoplanet="Teegardens-Star_b">Teegardens-Star_b</a></li>
+                    <li><a href="javascript:void(0);" data-exoplanet="BD-08_2823_b">BD-08 2823 b</a></li>
+                    <li><a href="javascript:void(0);" data-exoplanet="HD_110014_b">"HD 110014 b</a></li>
+                    <li><a href="javascript:void(0);" data-exoplanet="BD-08_2823_c">bd_08_2823_c</a></li>
+                    <li><a href="javascript:void(0);" data-exoplanet="HIP_78530_b">HIP-78530_b</a></li>
+    >
+                </ul>
+            </div>
+            <div class="qr-container card-body">
+                <img src="https://res.cloudinary.com/drjvgyusx/image/upload/v1728233439/WhatsApp_Image_2024-10-06_at_11.39.59_fsfbar.jpg" alt="QR Code" class="img-fluid" style = "width:200px">
+            </div>
+        </div>
+    </div>
+
+
+   <div> 
+   <!-- <iframe src="https://eyes.nasa.gov/apps/exo/#/planet/{{name_exoplaner}}" -->
+    <iframe id ="exoplanetFrame"
+    title="Visualización NASA"
+    class="smd-iframe-iframe margin-left-auto margin-right-auto border-0" 
+    style="width: 100%; height: 75vh;" 
+    allow="fullscreen"
+    allowfullscreen>
+</iframe>
+
+<div class="card-body" style="background-color:beige">
+    <div class="row">
+      <div class="col" style="width: auto;">
+               <!-- Contenedor del QR -->
+
+      </div>
+      <div class="col" style="padding-left: 20px;">
+        <h5 class="card-title text-uppercase text-muted mb-2">Datos</h5>
+        <span class="h2 font-weight-bold mb-0">It has a mass of 1.05 Earths, it takes 4.9 days to complete an orbit around its star and is located 0.0252 AU from its star.  Its discovery was announced in 2019.</span>  
+      </div>
+    </div>
+  </div>
+  
+</div>
+<script>
+    // Function to update iframe with selected exoplanet
+    function updateExoplanetIframe(exoplanetName) {
+        let iframeSrc = `https://eyes.nasa.gov/apps/exo/#/planet/${exoplanetName}`;
+        $('#exoplanetFrame').attr('src', iframeSrc);
+    }
+
+    // jQuery event listener for dropdown click
+    $("#lookAtDropdownOptions > li > a").click(function(e) {
+        e.preventDefault();  // Prevent the default anchor behavior (navigation)
+
+        // Get the exoplanet name from the clicked dropdown option
+        let exoplanetName = $(this).attr('data-exoplanet');
+
+        // Set the font-weight to bold for the selected exoplanet
+        $("#lookAtDropdownOptions > li > a").css("font-weight", "normal");  // Reset all to normal
+        $(this).css("font-weight", "bold");  // Highlight the selected one
+
+        // Update the iframe with the new exoplanet
+        updateExoplanetIframe(exoplanetName);
+    });
+</script>
+
+
+<script src="majorbodies.json"></script>
+<script src="include.js"></script>
+<script src="main.js"></script>
+<script src="ui.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>
